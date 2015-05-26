@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Pixelator editor</title>
+
+    <style>
+        div {
+            display: inline-block;
+            font-size: 0;
+
+        }
+        div.container {
+            display: block;
+        }
+
+        div#original div {
+           background-color: rgba(0,0,0,0.1);
+        }
+    </style>
+
+    <script src="../lib/require.js"></script>
+</head>
+<body>
+    <div class="container"><div id="0"></div><div id="1"></div><div id="2"></div></div><!--
+ --><div class="container"><div id="3"></div><div id="original"></div><div id="5"></div></div><!--
+ --><div class="container"><div id="6"></div><div id="7"></div><div id="8"></div></div>
+    <script>
+
+        require(['../source/Sprite', '../source/Tools/Pen', '../source/SpriteClone'], function(Sprite, Pen, SpriteClone) {
+
+            var sprite = new Sprite({width: 64, height: 64, scale: 4});
+            document.getElementById('original').appendChild(sprite.node);
+
+            var pen = new Pen({color: 'green', size: 1});
+            pen.sprite = sprite;
+
+            for (var i = 0; i < 9; i++) {
+                if (i !== 4) {
+                    var clone = new SpriteClone(sprite);
+                    document.getElementById(i).appendChild(clone.node);
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>
